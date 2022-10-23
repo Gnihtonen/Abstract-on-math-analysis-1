@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{mathdots}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{Открытые и замкнутые множества на прямой, их свойства, связанные с теоретико-множественными операциями. Внутренние, предельные и граничные точки множеств. Четыре эквивалентных описания замкнутого множества.}
+
+\subsection{Открытые и замкнутые множества на прямой, их свойства, связанные с теоретико-множественными операциями.}
+
+\textbf{Определение 1}.
+
+$\varepsilon$-окрестность точки $a \in\mathbb{R}$ называется множество $B_\varepsilon(a) := \{x\in\mathbb{R}: |x-a| < \varepsilon\} = (a-\varepsilon, a +\varepsilon).$
+
+\textbf{Определение 2}.
+
+Проколотая $\varepsilon$-окрестность точки $a \in\mathbb{R}$ называется множество $B'_\varepsilon(a) := B_\varepsilon \backslash \{a\}$.
+
+\textbf{Определение 3}.
+
+Множество $U\subset\mathbb{R}$ называется \textbf{открытым}, если для любой $a\in U$ найдётся такое $\varepsilon > 0$, что $B_\varepsilon \subset U$.
+
+\textbf{Определение 4}.
+
+Множество $V \subset\mathbb{R}$ называется \textbf{замкнутым}, если его дополнение открыто, т.е. $\mathbb{R} \backslash V - $ открытое множество.
+
+\textbf{Пример}.
+
+\begin{itemize}
+    \item[1.] Всякий интервал $(\alpha,\beta)$ - открытое множество, т.к. для каждой точки $a \in (\alpha, \beta)$ множество $B_{\min\{\frac{a-\alpha}{2}, \frac{\beta-a}{2}\}} \subset (\alpha,\beta)$. А также вся числовая прямая, лучи $(-\infty, \alpha), (\beta, +\infty)$, пустое множество будут являться открытыми.
+    \item[2.] Отрезок $[\alpha, \beta]$, вся числовая прямая, лучи $(-\infty, \alpha], [\beta, +\infty)$, пустое множество будут замкнутыми. (Если попросят доказать что-то отсюда - скажите, что дополнение будет открытым множеством).
+\end{itemize}
+
+\textbf{Свойства}.
+
+\textit{Объединение(1.1) любого набора и пересечение(1.2) конечного набора открытых множеств будет открытым множеством.}
+
+\textit{Пересечение(2.1) любого набора и объединение(2.2) конечного набора замкнутых множеств будет замкнутым множеством.}
+
+\begin{proof}
+
+ 
+
+\begin{itemize}
+    \item[1.1] Пусть $U = \bigcup\limits_{\alpha\in A}U_\alpha$, причём все $U_\alpha - $ открытые множества. Если $a\in U$, тогда найдётся такой индекс $\alpha$, что $a\in U_\alpha$. По определению найдётся такое $\varepsilon > 0$, что $B_\varepsilon(a) \subset U_\alpha$. Значит, по определению операции объединения, $B_\varepsilon(a)\subset U$. Т.е. $U - $ открытое множество.
+    \item[1.2] Пусть $U = \bigcap\limits_{j=1}^NU_j$, причём все $U_j - $ открытые множества. Если $a\in U$, то для каждого \newline$j\in \{1,...,N\}$ найдётся такое число $\varepsilon_j>0$, что $B_{\varepsilon_j}(a) \subset U_j$. Пусть $\varepsilon := \min\{\varepsilon_1,...,\varepsilon_N\}>0$. Тогда $B_\varepsilon(a)\subset B_\varepsilon_j(a) \subset U_j$ при каждом $j \in \{1,...,N\}$. Значит, $B_\varepsilon(a) \subset U$ и $U - $ открытое множество.
+    \item[2.1] Пусть $V = \bigcap\limits_{\alpha\in A}V_\alpha$, причём все $V_\alpha - $ замкнутые множества. По формулам де Моргана\newline $\mathbb{R}\backslash V = \mathbb{R}\backslash \bigcap\limits_{\alpha\in A} = \bigcup\limits_{\alpha\in A}(\mathbb{R}\backslash V_\alpha)$. По определению замкнутого множества, множества $U_\alpha = \mathbb{R} \backslash V_\alpha - $ открыты. По доказанному в 1.1 свойству открытых множеств, множество $\mathbb{R}\backslash V$ также открыто, а значит множество $V - $ замкнуто.
+    \item[2.2] Пусть $V = \bigcup\limits_{j=1}^NV_j$, причём все $V_j - $ замкнутые множества. По формулам де Моргана $\mathbb{R}\backslash V = \mathbb{R}\backslash\bigcup\limits_{j=1}^NV_j=\bigcap\limits_{j=1}^N(\mathbb{R}\backslash V_j).$ По определению замкнутого множества, множества $U_j := \mathbb{R}\backslash V_j - $ открыты. По уже доказанному свойству(1.2) открытых множеств, множество $\mathbb{R}\backslash V$ также открыто, а значит множество $V - $ замкнуто. 
+\end{itemize}
+\end{proof}
+
+\section{Внутренние, предельные и граничные точки множеств.}
+
+\textbf{Определение 5.}
+
+Точка $a\in\mathbb{R}$ называется \textbf{внутренней} точкой множества $M$, если она входит в это множество $M$ с некоторой своей окрестностью \underline{полностью} (т.е. $\exists\varepsilon > 0$ : $B_\varepsilon(a)\subset M$).
+
+\textbf{Определение 6.}
+
+Точка $a\in\mathbb{R}$ называется \textbf{предельной} точкой множества $M$, если каждая её проколотая окрестность имеет непустое пересечение с множеством $M$ (т.е. $\forall\varepsilon > 0: B'_\varepsilon(a)\cap M\neq \o$).
+
+\textbf{Определение 7.}
+
+Точка $a\in\mathbb{R}$ называется \textbf{граничной} точкой множества $M$, если каждая её окрестность имеет непустое пересечение как с множеством $M$, так и с его дополнением (т.е. $\forall\varepsilon > 0: B_\varepsilon(a)\cap M\neq \o$ и $B_\varepsilon(a)\cap(\mathbb{R}\backslash M)\neq\o$).
+
+\textbf{Пример.}
+
+Для множества $M = (0, 1]\cup\{3\}$ точки $0, \frac{1}{2}, 1$ будут предельными, а точки $-1, 3$ не будут. Точки $0, 1, 3$ будут граничными, а $-1$ и $\frac{1}{2}$ не будут. Точка $\frac{1}{2}$ будет внутренней, а точки $-1, 0, 1, 3$ не будут.
+
+\textbf{Замечание.}
+
+Точка $a$ предельная для $M$ тогда и только тогда, когда найдётся сходящаяся к $a$ последовательность $a_n \in M\backslash\{a\}$. 
+
+\begin{proof}
+Действительно, если $a$ предельная, то для каждого $n$ найдётся точка \newline$a_n\in B'_{1/n}(a)\cap M$. Тогда $a_n\in M\backslash\{a\}$ и $a_n\rightarrow a.$ 
+
+Наоборот (если есть сходящаяся к $a$ последовательность, то $a - $ предельная точка для $M$), если $a_n\in M\backslash\{a\},$ то каждого $\varepsilon>0$ найдётся такой номер $N$, что $|a_n - a|<\varepsilon$ при $n>N$. Таким образом, $a_{N+1}\in B'_\varepsilon(a)\cap M$.
+\end{proof}
+
+\newpage
+
+\section{Четыре эквивалентных описания замкнутого множества.}
+
+\textbf{Теорема}
+
+\textit{Следующие утверждения равносильны.}
+
+\begin{itemize}
+    \item[1)] \textit{$V$ - замкнутое множество;}
+    \item[2)] \textit{$V$ содержит все свои граничные точки;}
+    \item[3)] \textit{$V$ содержит все свои предельные точки}
+    \item[4)] \textit{если $a_n\in V$ и $a_n\rightarrow a$, то $a\in V$.}
+\end{itemize}
+
+\begin{proof}
+ 
+\begin{itemize}
+    \item[1) \Rightarrow2)]\textit{(Если $V$ - замкнутое множество, то оно содержит все свои граничные точки)}: \newline Пусть $a$ граничная точка для $V$, для которой выполнено, что $a\not\in V$, то $a\in\mathbb{R}\backslash V$ - открытое множество. Это значит, что найдётся такое $\varepsilon > 0$, что $B_\epsilon(a)\subset \mathbb{R}\backslash V$ (т.к. $\mathbb{R}\backslash V$ - открытое множество). Т.е. нашлась окрестность $B_\varepsilon(a)$, которая не пересекается с множеством $V$, а значит $a$ не граничная точка.
+    \item[2) \Rightarrow3)] \textit{(Если $V$ содержит все свои граничные точки, то оно содежит и все свои предельные)}: \newlineПусть $a$ предельная для $V$ точка и предположим, что $a \not\in V$. Значит $a$ и не граничная точка (т.к. $V$ содержит все свои граничные точки). Поэтому найдётся такое $\varepsilon > 0$, что $B_\varepsilon(a)\cap V = \o$. Таким образом, $B'_\varepsilon(a)\cap V=\o$ и $a$ не предельная для $V$.
+    \item[3) \Rightarrow4)] \textit{(Если $V$ содержит все свои предельные точки, то если $a_n\in V$ и $a_n\rightarrow a$, то $a\in V$)}: \newline Пусть $a_n\in V, a_n\rightarrow a$. Если $a\not\in V$, то $a\neq a_n$ при каждом $n$. По замечанию выше $a - $ предельная точка для множества $V$, что противоречит тому, что $V$ содержит все свои предельные точки.
+    \item[4) \Rightarrow1)] \textit{(Если $a_n\in V$ и $a_n\rightarrow a$, то $a\in V$. А отсюда $V - $ замкнутое множество)}: \newline Пусть $V$ - не замкнуто. $\Leftrightarrow$ $\mathbb{R}\backslash V$ - не открыто $\Rightarrow$ существует такое $a\in \mathbb{R}\backslash V: B_\varepsilon(a) \cap V \neq \o$ и при этом $B_\varepsilon(a)\not\subset V$. Тогда пусть $\varepsilon_n = \frac{1}{n} \Rightarrow \exists a_n\in B_{\frac{1}{n}}(a) \cap V \Rightarrow a_n\in V$ и $a_n\rightarrow a \Rightarrow a\in V$ (по условию). Получили противоречие, а значит $V$ - замкнуто.
+\end{itemize}
+\end{proof}
+
+\end{document}
