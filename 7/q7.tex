@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[russian]{babel}
+\usepackage[a4paper,top=1cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage[export]{adjustbox}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=cyan,
+	filecolor=magenta,      
+	urlcolor=blue,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}
+
+\title{}
+\author{@lolfucjj - tg}
+
+\DeclareMathOperator*\lowlim{\underline{lim}}
+\DeclareMathOperator*\uplim{\overline{lim}}
+
+\begin{document}
+	\section*{Вопрос 7}
+	\subsection*{Определение подпоследовательности. Её предел(частичный предел последовательности).}
+	Пусть дана последовательность $\left\{a_n\right\}_{n=1}^{\infty}$. Так же, пусть задана какая-то возрастаюшая последовательность $\underline{\text{натуральных}}$ чисел $n_1 < n_2 < n_3 < ... $.\\
+	Тогда, говорят, что последовательность $b_k = a_{n_{k}}$ является $\textbf{подпоследовательностью}$ последовательности $\left\{a_n\right\}_{n=1}^{\infty}$.\\
+	Тогда $\textbf{частичным пределом}$ последовательности  $\left\{a_n\right\}_{n=1}^{\infty}$ называют число $a\in\mathbb{R}$ такое, что $a = \lim\limits_{k\rightarrow\infty}a_{n_{k}}$, для некоторой подпоследовательности $\left\{a_{n_{k}}\right\}_{k=1}^{\infty}$. \\
+	То есть другими словами число $a\in\mathbb{R}$ называют  $\textbf{частичным пределом}$, если $a$ является пределом некоторой бесконечной подпоследовательности последовательности  $\left\{a_n\right\}_{n=1}^{\infty}$.
+	\subsection*{Предложение №1}
+	$\emph{\text{Любая подпоследовательность сходящейся последовательности сходится к пределу}} \\
+	\emph{\text{этой последовательности.}}$\\\\
+	$\emph{\text{Докозательство}}$. Рассмотрим последовательность $\left\{a_n\right\}_{n=1}^{\infty}$. Пусть $\lim\limits_{n\rightarrow\infty} a_n = A$ и пусть\\ $\left\{a_{n_k}\right\}_{k=1}^{\infty}$ - некоторая подпоследовательность. 
+	\\Тогда по поределению предела $\forall (\epsilon > 0)\; \exists N(\epsilon): \forall (n > N(\epsilon))\; |a_n - A| < \epsilon$.\\
+	Теперь рассмотрим индексы подпоследовательности. Т.к. $1 \leqslant n_1 $ и $n_{k-1} < n_{k}$ по индукции получим, что $k\leqslant n_k$. Тогда заметим, что для всех $k > N$, получим, что $|a_{n_k} - A| < \epsilon$.
+	\subsection*{Верхний и нижний пределы ограниченной последовательности.}
+	Рассмотрим последоваетельность $M_n := \sup\limits_{k>n} a_k$ и $m_n := \inf\limits_{k>n}a_k$. Ясно, что посделовательность $M_n$ - невозрастает, а последовательность $m_n$ - неубывает. Поэтому для \underline{\text{ограниченной}} последовательности существует:\[
+	\lowlim\limits_{n\rightarrow\infty} a_n := \lim\limits_{n\rightarrow\infty} m_n - \textbf{нижний частичный предел}
+	\] \[
+	\uplim\limits_{n\rightarrow\infty} a_n := \lim\limits_{n\rightarrow\infty} M_n - \textbf{верхний частичный предел}.
+	\]
+	\subsection*{Теорема №1}
+	\label{subsec:t1}
+	\textit{Пусть} $\{a_n\}_{n=1}^{\infty}$ \textit{-- ограниченная последовательность. Тогда} $\uplim\limits_{n \to \infty} a_n, \lowlim\limits_{n \to \infty} a_n$ \textit{-- частичные пределы последовательности} $\{a_n\}_{n=1}^{\infty}$ \textit{и любой другой предел принадлежит отрезку} \[[\lowlim\limits_{n \to \infty} a_n, \uplim\limits_{n \to \infty} a_n]
+	\]
+	\textit{Доказательство.}
+	Покажем, что $M := \uplim\limits_{n \to \infty} a_n$ -- частичный предел. Для этого индуктивно построим последовательность, которая сходится к $\uplim\limits_{n \to \infty} a_n$. Пусть $n_1 = 1$. Пусть индексы $n_1 < n_2 < ... < n_k$ уже построены. Тогда подберём такой номер $n_{k+1} > n_k$, что
+	\[
+	M_{n_k} - \frac{1}{k+1} < a_{n_{k+1}} \leq M_{n_k}.
+	\]
+	Как подпоследовательность сходящейся последовательности $M_{n_k} \to M$, поэтому по теореме о сходимости зажатой последовательности (по теореме о двух полицейских и преступнике) получаем, что $\lim\limits_{k \to \infty} a_{n_k} = M$. \\\\
+	Аналогично проверяется и то, что $\lowlim\limits_{n \to \infty} a_n$ -- частичный предел. \\\\
+	Пусть теперь $a$ -- частичный предел. Это означает, что $a = \lim\limits_{k \to \infty} a_{n_k}$ для некоторой подпоследовательности $\{a_{n_k}\}_{n=1}^{\infty}$. Тогда $m_{n_{k-1}} \leq a_{n_{k}} \leq M_{n_{k-1}}$. По теореме о переходе к пределу в неравенствах получаем, что $\lowlim\limits_{n \to \infty} a_n \leq a \leq \uplim\limits_{n \to \infty} a_n$..
+	\subsection*{Следствие из Теоремы 1}
+	Теорема Больцано - во всякой ограниченной последовательности можно найти сходящуюся подпоследовательность.
+	\subsection*{Теорема №2}
+	$\textit{Ограниченная последовательность сходится тогда, и только тогда}, \textit{когда множество её частичных}\\ \textit{пределов  состоит из одного элемента.}$\\\\
+	$\textit{Докозательство}$. То, что у сходящейся последовательности только один предел, уже доказано ранее.\\
+	Теперь предположим, что у $\underline{\text{ограниченной}}$ последовательности $\left\{a_n\right\}_{n=1}^{\infty}$ только один частичный предел. По доказаному в \hyperref[subsec:t1]{Теорема №1} в частности это означает, что \[
+	\lowlim\limits_{n\rightarrow\infty} a_n = \uplim\limits_{n\rightarrow\infty} a_n  = A
+	\]
+	Тогда, $m_{n-1} \leqslant a_n \leqslant M_{n-1}$, и по теореме о сходимости зажатой последовательности, получаем что $\lim\limits_{n\rightarrow\infty}a_n = A$\textbf{}
+\end{document}
