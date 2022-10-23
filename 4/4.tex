@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{statement}{Утверждение}
+\newtheorem{lemma}{Лемма}
+
+\begin{document}
+\section*{Вопрос 4}
+\subsection*{Переход к пределу в неравенствах}
+\begin{statement}
+Пусть $\lim\limits_{n\to\infty} a_n = a,\;\lim\limits_{n\to\infty} b_n = b$, тогда $\exists\,N\;\forall n > N: a_n \le b_n \Rightarrow a \le b$.
+\end{statement}
+\begin{proof}
+Предположим $a - b = \varepsilon_0 > 0 \Rightarrow\\\Rightarrow \exists N_1,\, N_2: \left|a_n - a\right| < \frac{\varepsilon_0}{2}\;\forall\, n>N_1,\; \left|b_n - b\right| < \frac{\varepsilon_0}{2}\; \forall\, n>N_2 \Rightarrow\\\Rightarrow \epsilon_0 = a - b = a - a_n + a_n - b + b_n - b_n \le a - a_n + b_n - b < \varepsilon_0$ -- противоречие. 
+\end{proof}
+\subsection*{Лемма о зажатой последовательности}
+\begin{lemma}
+Пусть $\lim\limits_{n\to\infty} a_n = \lim\limits_{n\to\infty} b_n = a$. Тогда $\exists N\;\forall n>N: a_n \le c_n \le b_n \Rightarrow \lim\limits_{n\to\infty} c_n = a$.
+\end{lemma}
+\begin{proof}
+По определению $\forall\varepsilon\;\exists\, N_1\in\mathbb{N},\,N_2\in\mathbb{N}: \left|a - a_n\right| < \varepsilon\,\forall n > N_1,\; \left|b - b_m\right| < \varepsilon\, \forall m > N_2 \Rightarrow \forall k > \max\{N, N_1, N_2\}: a - \varepsilon < a_k \le c_k \le b_k < a + \varepsilon \Rightarrow \lim\limits_{n\to\infty} c_n = a$
+\end{proof}
+\subsection*{Вещественная прямая}
+Пусть $a, b \in\mathbb{R}$ и $a < b$. Множества $[a;\, b] := \{x\in\mathbb{R}: a \le x \le b\},\; (a;\, b):=\{x\in\mathbb{R}: a < x < b\}$ называются отрезком и интервалом соответственно.\\
+Длина отрезка (интервала) -- величина $b - a$. 
+\subsection*{Принцип вложенных отрезков}
+\begin{theorem}
+Всякая последовательность $\{[a_n;\, b_n]\}_{n = 1}^\infty$ вложенных отрезков (то есть таких, что $[a_{n + 1};\, b_{n + 1}] \subset [a_n;\, b_n]$) имеет общую точку. Кроме того, если длины отрезков стремятся к нулю, то есть $b_n - a_n \to 0$, то такая общая точка только одна.
+\end{theorem}
+\begin{proof}
+По условию $[a_{n + 1};\, b_{n + 1}] \subset [a_n;\, b_n]$, откуда $a_n \le a_{n + 1} \le b_{n + 1} \le b_n$.\\
+Пусть $n < m$, тогда $a_n \le a_m \le b_m \Rightarrow a_n < b_m$. При $n > m$ получим, что $a_n \le b_n \le b_m \Rightarrow a_n < b_m$. Таким образом, $a_n < b_m\;\forall\;n,m\in\mathbb{N}$, тогда если $A:=\{a_n,\,n\in\mathbb{N}\},\,B:=\{b_m,\,m\in\mathbb{N}\}$, то $A$ левее $B$.\\
+Тогда по принципу полноты $\exists\;c\in\mathbb{R}:\; a_n \le c \le b_m\;\forall\;n, m\in\mathbb{N}$.\\
+В частности, $a_n \le c \le  b_n \Rightarrow c\in[a_n;\, b_n]$.\\
+\\
+Пусть общих точек две: $c$ и $c'$. Без ограничения общности, скажем, что $c < c'$. \\
+Тогда, получим, что $a_n \le c \le c' \le b_n$ и $c' - c \le b_n - a_n$. \\
+Но $\lim\limits_{n\to\infty} b_n - a_n = 0 \Rightarrow \forall\varepsilon>0\;\exists N(\varepsilon)\in\mathbb{N}:\forall n\ge N(\varepsilon) \left|0 - b_n + a_n\right| < \varepsilon$. \\
+Пусть $\varepsilon = c' - c$, тогда $\left|a_n - b_n\right| < c' - c \Rightarrow b_n - a_n < c' - c$ -- противоречие. 
+\end{proof}
+\subsection*{Геометрическая интерпретация вещественных чисел}
+Сопоставим десятичной дроби $0.a_1a_2...$ последовательность вложенных отрезков по следующему правилу. \\
+Разделим отрезок $[0;\, 1]$ на 10 равных частей и выберем из получившихся частей $a_1+1$-ый по счету.\\
+Проделываем ту же самую процедуру с выбранным отрезком и выбираем $a_2+1$-ый по счету. И так далее.\\
+Получаем последовательность вложенных отрезков. Причем длина отрезка, получаемого на $n$-ом шаге, равна $\frac{1}{10^n}$. \\
+По теореме 1 существует единственная ($\lim\limits_{n\to\infty} \frac{1}{10^n} = 0$) общая точка получившейся последовательности вложенных отрезков, которая совпадает с $0.a_1a_2$.
+\subsection*{Анекдот}
+ПРЕПОД ПО МАТАНУ ДОСТАЁТ НА ЛЕКЦИИ ХУЙ, НАЧИНАЕТ ЕГО НАЯРИВАТЬ, ПРИГОВАРИВАЯ:\\
+-ДЛЯ ЛЮБОГО ЭПСИЛОН, ДЛЯ ЛЮБОГО ЭПСИЛОН, — ОЗАЛУПЛИВАЕТ И СТУЧИТ ПО ПАРТЕ:\\
+-БОЛЬШЕ НУЛЯ! ОЙ! БОЛЬШЕ НУЛЯ! — ОДИН ПАЦАН СПРАШИВАЕТ:\\
+-А ПОЧЕМУ ВЫ ЗАЛУПОЙ ПО ПАРТЕ СТУЧИТЕ?\\
+-ДЕЙСТВИТЕЛЬНО, ЭТО Я ПЕРЕПУТАЛ С КРИТЕРИЕМ КОШИ, СЕЙЧАС ПО ГЕЙНЕ БУДЕТ, — БЬЁТ ЯЙЦАМИ ПО ЛИЦУ СТУДЕНТАМ ЗА ПЕРВОЙ ПАРТОЙ И КРИЧИТ:\\
+-ПРОИЗВОЛЬНАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ!
+\end{document}
