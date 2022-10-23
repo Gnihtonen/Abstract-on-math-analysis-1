@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+
+
+%%% так удобно сокращать команды %%%
+\newcommand\nn{$\mathds{N}$}
+
+
+\title{Коллокиум по курсу "Математический анализ", I курс, осенний семестр 2022}
+\author{Группа БПМИ2211}
+
+\begin{document}
+\maketitle
+
+\section{Теорема Больцано. Фундаментальная последовательность и критерий Коши. Расходимость последовательности $a_n = \sum^n_{k=1}\frac{1}{k}$. Вычисление $\sqrt{2}$ с помощью рекуррентной формулы $a_{n+1} = 1 + \frac{1}{1+a_n}, a_1 = 1$, обоснование сходимости.}
+\subsection{Теорема Больцано}
+(Следствие теоремы о связи верхнего и нижнего частичного предела с множеством частичных пределов. \textit{Теорема 23}) \\ 
+Во всекой ограниченной последовательности можно найти сходящуюся подпоследовательность. ($\{a_n\}^{\infty}_{n=1}-\text{ограниченная} \Rightarrow \exists$ сходящаяся подпоследовательность.)
+\subsection{Фундаментальная последовательность и критерий Коши}
+Говорят, что последовательность $\{a_n\}^\infty_{n=1}$ фундаментальна (или является последовательностью Коши), если для каждого числа $\varepsilon > 0$ найдется такое натуральное число (номер) $N(\varepsilon) \in \mathds{N}$, что $|a_n - a_m| < \varepsilon$ при каждых $n, m > N(\varepsilon)$. То же самое утверждение можно переписать в кванторах $\forall - \exists$ следующим образом: $$\forall \varepsilon > 0 \exists N(\varepsilon) \in \mathds{N}: \forall n, m > N(\varepsilon) \ |a_n - a_m| < \varepsilon$$ \\ 
+\textbf{Пример.} \begin{itemize}
+    \item[1)]Последоввательность $a_n =\frac{1}{n}$  фундаментальная. Действительно $$\left|\frac{1}{n} - \frac{1}{m}\right| \leqslant max\left\{\frac{1}{n}, \frac{1}{m}\right\},$$ поэтому при $N(\varepsilon) = \left[\frac{1}{\varepsilon}\right] + 1 > \frac{1}{\varepsilon} \text{ выполнено } |a_n - a_m| < \varepsilon$
+    \item[2)] Последовательность $a_n = (-1)^n$ не фундаментальная. Действительно, если мы возьмем  $\varepsilon = 1$, то, какой бы ни был номер $N(\varepsilon)$, для произвольного $n > N(\varepsilon)$ выполнено $|a_n - a_{n+1}| = 2 > 1.$
+\end{itemize} 
+\textbf{Критерий Коши}. $\{a_n\}_{n=1}^\infty$ - сх-ся $\iff$ $\{a_n\}_{n=1}^\infty$ - посл. Коши
+\begin{proof}
+$\Longrightarrow$ Пусть $\varepsilon > 0$ По определению сходящейся последовательности найдется такой номер $N \in \mathds{N}$, что $|a_n - a| < \frac{\varepsilon}{2}$ при $n > N$, где $ \lim_{n\to\infty} a_n = a$. Тогда при $n, m > N$ выполнено $$|a_n - a_m| = |a_n - a_m + a - a| \leqslant |a_n - a| + |a_m - a| < \varepsilon$$ \\ $\Longleftarrow$(План: 1. Ограничена 2. предел по т. Больцано 3. $a = \lim_{n\to\infty}a_n$) \begin{itemize}
+    \item[1.] Заметим, что последовательность $\{a_n\}_{n=1}^\infty$ ограничена. $\varepsilon = 1 \ \exists N: \forall n, m > N: |a_n - a_m| < 1$ (из условия). Отсюда $|a_n| = |a_n + a_{N+1} - a_{N+1}| \leqslant |a_n - a_{N+1}| + |a_{N+1}| < 1 + |a_{N+1}|$, при $n>N$. Значит, $$|a_n| < M = max\{1+|a_{N+1}|, |a_1|, ..., |a_N|\}.$$
+    \item[2.]У ограниченной последовательности $\{a_n\}_{n=1}^\infty$ по теореме Больцано есть хотя бы один частичный предел $a$. $\Rightarrow \exists \{a_{n_{k}}\}_{k=1}^\infty: a_{n_{k}} \rightarrow a$
+    \item[3.] $\forall \varepsilon > 0\ \exists k_0: k > k_0\ |a_{n_{k}} - a| < \varepsilon.$ Кроме того, в силу фундаментальности найдется номер N, для которого $|a_n - a_m| < \varepsilon$ при $n, m > N$. Пусть $k$ выбрано так, что $k > k_0$ и $n_k > N$, тогда при каждом $n > N$ выполнено, что $$|a_n - a| = |a_n + a_{n_{k}} - a_{n_{k}} - a| < \underset{<\varepsilon}{|a_n - a_{n_k}|} + \underset{<\varepsilon}{|a- a_{n_k}|} < 2\varepsilon$$
+\end{itemize}
+\end{proof}
+\subsection{Расходимость последовательности $a_n = \sum^n_{k=1}\frac{1}{k}$} Проверим отридцание фундаментальности $$\exists \varepsilon > 0 \ \forall N: \exists \underset{n > m}{n,m > N}:|a_n - a_m| > \varepsilon$$ \\ $|a_n - a_m| = \frac{1}{m+1} + \frac{1}{m+2}+...+\frac{1}{n} 
+\geqslant \frac{n-m}{n}= 1 - \frac{m}{n}$ Для $\varepsilon = \frac{1}{2}, n = 2m, m > N \Longrightarrow |a_n - a_m| \leqslant \frac{1}{2} \Longrightarrow$ не выполнено условие Коши $\Longrightarrow$ последовательность расходится
+\subsection{Вычисление $\sqrt{2}$ с помощью рекуррентной формулы $a_{n+1} = 1 + \frac{1}{1+a_n}, a_1 = 1$, обоснование сходимости} Заметим, что $a_n \geqslant 1$ и $$|a_{n+1} - a_n| = \left|\frac{1}{1+a_n} - \frac{1}{1+a_{n-1}} \right| = \frac{|a_{n-1} - a_n|}{(1+a_n)(1+a_{n+1})} \leqslant \frac{1}{4}|a_{n-1} - a_n| \leqslant \left(\frac{1}{4}\right)^{n-1}(a_2 - a_1) = \left(\frac{1}{4}\right)^{n-1} \frac{1}{2}$$ Отсюда при $m > n$ $$|a_m - a_n| \leqslant |a_m - a_{m-1}| +...+ |a_{n+1} - a_n| \leqslant \frac{1}{2}\left(\left(\frac{1}{4}\right)^{m-2} + ... + \left(\frac{1}{4}\right)^{n-1}\right) = \frac{1}{2}\left(\frac{1}{4}\right)^{n-1}\left(\frac{1 - \left(\frac{1}{4}\right)^{m-n}}{1 - \frac{1}{4}}\right) = \frac{8}{3}\left(\frac{1}{4}\right)^n$$ Т.к. $\left(\frac{1}{4}\right)^n \rightarrow 0: \forall \varepsilon > 0 \ \exists N: n> N \ \left(\frac{1}{4}\right)^n < \varepsilon$. Тем самым, для последовательности ${an}_{n=1}^\infty$ выполнен критерий Коши, а значит существует $A = \lim_{n\to\infty} a_n \Longrightarrow \lim_{n\to\infty} a_n = A = \lim_{n\to\infty} a_{n+1} = 1 + \frac{1}{1 + A} \\ A(A+1) = A + 1 + 1 \iff A^2 = 2 \iff A = \sqrt{2}$ т.к. $a_n \geqslant 0$
+\end{document}
