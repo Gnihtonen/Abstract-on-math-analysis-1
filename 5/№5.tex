@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{proposition}[theorem]{Предложение}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Определение}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\title{Коллоквиум по курсу "Математический анализ", I курс, осенний семестр 2022}
+\author{Группа БПМИ2211}
+
+\begin{document}
+\maketitle
+
+\section{Точные верхние и нижние грани, их существование у ограниченных множеств. Теорема Вейерштрасса о пределе монотонной ограниченной последовательности.}
+\subsection{Точные верхние и нижние грани, их существование у ограниченных множеств.}
+Пусть $A$ --- непустое подмножество вещественных чисел.
+
+Число $b$ называется {\bf верхней гранью} множества $A$,
+если $a\le b$ для каждого числа $a\in A$.
+Если есть хотя бы одна верхняя грань, то множество называют {\bf ограниченным сверху}.
+Наименьшая из верхних граней множества $A$ называется {\bf точной верхней гранью} множества $A$
+и обозначается $\sup A$ (супремум).
+
+Число $b$ называется {\bf нижней гранью} множества $A$,
+если $b\le a$ для каждого числа $a\in A$.
+Если есть хотя бы одна нижняя грань, то множество называют {\bf ограниченным снизу}.
+Наибольшая из нижних граней множества $A$ называется {\bf точной нижней гранью} множества $A$
+и обозначается $\inf A$ (инфимум).
+
+Ограниченное и сверху и снизу множество называется {\bf ограниченным}.
+\begin{example}
+{\rm
+Пусть $A=(0,1]$.
+Тогда $\inf A = 0 \\ \forall x \in A: x \geq 0 \Rightarrow 0$ -- нижняя грань. Если $b$ -- нижняя грань, то $\frac{1}{n} \in A,\ \frac{1}{n} \geq b \Rightarrow 0 := \lim_{n\to\infty}\frac{1}{n} > b$ \\ 
+и $\sup A = 1$. 1 -- верхняя грань, т.к. $\forall x \in A: 1 \geq x \\ b$ -- верхняя грань, $b \geq 1, 1\in A$
+}\end{example}
+Установим существование точных верхних (нижних)
+граней у ограниченных сверху (снизу) множеств.
+
+\begin{theorem}
+Пусть $A$ --- непустое ограниченное сверху (снизу)
+множество. Тогда существует точная верхняя (нижняя)
+грань $\sup A$ ($\inf A$).
+\end{theorem}
+
+\begin{proof}
+Пусть $A$ --- непустое ограниченное сверху множество из условия,
+а $B$ --- непустое (по условию) множество его верхних граней.
+Тогда $A$ левее $B$ и существует разделяющий $A$ и $B$ элемент $c$.
+Он явлется верхней гранью для $A$ и $c\le b$ для каждой верхней грани множества $A$($c$ -- наименьшая из верхних граней).
+По определению $c=\sup A$.
+
+Наличие $\inf$ доказывается аналогично или переходом к множеству $-A$.
+\end{proof}
+\textit{
+Отсюда получается полезное утверждение о сходимости монотонной ограниченной последовательности.}
+\subsection{Теорема Вейерштрасса о пределе монотонной ограниченной последовательности} 
+Пусть последовательность $\{a_n\}_{n=1}^\infty$ не убывает ($a_n\le a_{n+1}$)
+и ограничена сверху. Тогда эта последовательность сходится к своему супремуму.
+
+Аналогично, пусть последовательность $\{a_n\}_{n=1}^\infty$ не возрастает ($a_{n+1}\le a_n$)
+и ограничена снизу. Тогда эта последовательность сходится к своему инфимуму.
+
+\begin{proof}
+Докажем только первое утверждение.
+Второе доказывается аналогично или переходом к последовательности $\{-a_n\}_{n=1}^\infty$.
+
+Пусть $M=\sup\{a_n\colon n\in \mathbb{N}\} = \sup\limits_{n\in \mathbb{N}}a_n$.
+Тогда для каждого $\varepsilon>0$ найдется номер $N\in \mathbb{N}$, для которого
+$M-\varepsilon< a_N$ (иначе $M-\varepsilon$ --- верхняя грань, чего не может быть).
+В силу того, что последовательность неубывающая, при каждом $n>N$ выполнено
+$$M-\varepsilon< a_N\le a_n\le M< M+\varepsilon.$$
+Тем самым, по определению $M=\lim a_n$.
+\end{proof}
+\textit{В качестве примера см. п.1 билет 6.}
+\end{document}
