@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{mathdots}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\DeclareRobustCommand{\divby}{%
+  \mathrel{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}%
+}
+
+\begin{document}
+
+\section{Иррациональность числа $\sqrt{2}$ (т.е. положительного решения уравнения $x^2 = 2$), его существование в рамках вещественных чисел, как следствие принципа полноты.}
+
+\subsection{Иррациональность числа $\sqrt{2}$ (т.е. положительного решения уравнения $x^2 = 2$).}
+
+Докажем, что рациональных решений уравнения $x^2 = 2$ не существует.  (от противного)  
+\begin{proof}
+Предположим, что $\frac{p}{q}$ – такое решение, где $p \in \mathbb{Z}$, $q\in\mathbb{N}$ и дробь несократима, т.е. нет общ делителей.
+Тогда $2 = \frac{p^2}{q^2} \Leftrightarrow 2q^2=p^2 \Rightarrow p^2\divby2\Rightarrow p\divby2\Rightarrow p = 2p_1 \Rightarrow 2q^2 = 4p_1^2 \Leftrightarrow \newline \Leftrightarrow q^2 = 2p_1^2 \Rightarrow q \divby2 \Rightarrow $ $p$ и $q$ - чётные, а $\frac{p}{q} - $ сократимая дробь $\Rightarrow$ противоречие.
+Таким образом, доказали, что $\sqrt{2} \not\in \mathbb{Q}$.
+\end{proof}
+
+\subsection{Существование $\sqrt{2}$ в рамках вещественных чисел.}
+
+	Объясним чем с точки зрения структуры множества чисел обусловлено такое “отсутствие” $\sqrt{2}$.
+Пусть $A = \{a \in \mathbb{R}: a > 0, a^2 \leq 2\}$ и $B = \{b\in\mathbb{R}: b > 0, b^2 \geq 2\}$. Заметим, что множество $A$ лежит левее множества $B$, так как $0 < b^2 – a^2 = (b-a)\cdot(b+a)$ для каждых $a \in A$ и $b \in B$, и $a + b > 0$. Если бы существовало число $c$, разделяющее $A$ и $B$, то обязательно $c^2 = 2$. 
+
+Действительно, во-первых, заметим, что $1 \leq c \leq 2$ т.к. $1 \in A, 2 \in B$.
+
+Теперь, если $c^2 < 2$, то число $c + \frac{2-c^2}{5} \in A$, т.к. 
+$(c+\frac{2-c^2}{5})^2 = c^2 + 2c \cdot \frac{2-c^2}{5} + (\frac{2-c^2}{5})^2 \leq c^2 + 4 \cdot\frac{2-c^2}{5} + \frac{2-c^2}{5}  \leq 2$, но $c + \frac{2-c^2}{5} > c \Rightarrow c$ не разделяет $A$ и $B$.
+
+Если  $c^2 > 2$, то число $c - \frac{c^2-2}{4} \in B$, т.к.
+$(c-\frac{c^2-2}{4})^2 \geq c^2 - 2c \cdot \frac{c^2-2}{4} \geq c^2 - 4 \cdot\frac{c^2-2}{4} = 2$, но $c - \frac{c^2-2}{4} < c \Rightarrow c$ не разделяет $A$ и $B$.
+
+Таким образом, $c^2 = 2$. (Так как $c^2 = 2$, где $c$ разделяет $A$ и $B$, то из принципа полноты для десятичных дробей следует, что число $c$ существует.)
+
+\end{document}
