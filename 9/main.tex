@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\begin{document}
+
+\section{Числовые ряды}
+
+\subsection{Числовой ряд}
+Пусть дана последовательность $\textstyle\{a_n\}_{n=1}^{\infty}$, тогда числовым рядом с членами $a_n$ называется выражение:
+$$a_1 + a_2 + a_3 + ... = \displaystyle\sum_{k = 1}^{\infty}a_k$$
+
+\subsection{Переформулировка критерия Коши для числовых рядов}
+Ряд сходится тогда и только тогда, когда:
+$$\forall \varepsilon > 0 \ \exists N \in \mathbb{N} : \forall n > m > N \to \left|\displaystyle\sum_{k = m + 1}^n a_k\right| = |S_n - S_m| < \varepsilon$$
+
+\subsection{Необходимое условие сходимости числового ряда}
+Если числовой ряд сходится, то $a_k \to 0$ при $k \to \infty $
+\begin{proof}
+Из критерия коши следует, что: $$\forall \varepsilon > 0 \ \exists N \in \mathbb{N}: \forall n >  N + 1 \to |a_n| = |S_n - S_{n-1}| < \varepsilon$$
+\end{proof}
+
+\subsection{Абсолютная и условная сходимость рядов}
+\begin{enumerate}
+Говорят, что ряд $\displaystyle\sum_{k = 1}^{\infty}a_k$ сходится абсолютно, если сходится ряд $\displaystyle\sum_{k = 1}^{\infty}|a_k|$ \\
+Говорят, что ряд $\displaystyle\sum_{k = 1}^{\infty}a_k$ сходится условно, если он сходится, а ряд $\displaystyle\sum_{k = 1}^{\infty}|a_k|$ расходится 
+\end{enumerate}
+
+\subsection{Cходимость абсолютно сходящегося ряда}
+Если ряд $\displaystyle\sum_{k = 1}^{\infty}|a_k|$ сходится, то и $\displaystyle\sum_{k = 1}^{\infty}a_k$ тоже сходится
+\begin{proof}
+Из сходимости ряда $\displaystyle\sum_{k = 1}^{\infty}|a_k|$ следует выполнение критерия Коши для этого ряда, то есть что:
+$$\forall \varepsilon > 0 \ \exists N \in \mathbb{N}: \forall n > m > N \to \displaystyle\sum_{k = m + 1}^{n}|a_k| < \varepsilon$$
+но так как $\displaystyle\sum_{k = m + 1}^{n}|a_k| \geq \left|\displaystyle\sum_{k = m + 1}^{n}a_k\right|$, то критерий Коши выполнен и для ряда без модулей.
+\end{proof}
+
+\subsection{Признак сравнения}
+\begin{enumerate}
+Пусть $0 \leq a_n \leq b_n$ тогда если ряд $\displaystyle\sum_{k = 1}^{\infty}b_k$ сходится, то и $\displaystyle\sum_{k = 1}^{\infty}a_k$ сходится.\\
+Если же $\displaystyle\sum_{k = 1}^{\infty}a_k$ расходится, то и $\displaystyle\sum_{k = 1}^{\infty}b_k$ расходится.
+\end{enumerate}
+
+\subsection{Признак Коши}
+Пусть $\textstyle\{a_n\}_{n=1}^{\infty}$ - невозрастающая последовательность, $ a_n \geq 0$. Ряд $\displaystyle\sum_{k = 1}^{\infty}a_k$ сходится тогда и только тогда, когда сходится ряд $\displaystyle\sum_{k = 1}^{\infty}2^k a_{2^k}$
+\begin{proof}
+Заметим, что $a_2 + 2a_3 + ... + 2^{n-1}a_{2^n} \leq a_2 + a_3 + ... + a_{n^k} \leq 2a_2+ 4a_4 + ... + 2^n a_{2^n}$, тогда из ограниченности частичных сумм ряда $
+\displaystyle\sum_{k = 1}^{\infty}2^k a_{2^k}$ следует ограниченность частичных сумм $\displaystyle\sum_{k = 1}^{\infty}a_k$ и наоборот
+\end{proof}
+
+\subsection{Сходимость ряда $\displaystyle\sum_{k = 1}^{\infty}\frac{1}{k^p}$}
+Ряд $\displaystyle\sum_{k = 1}^{\infty}\frac{1}{k^p}$ сходится при $p > 1$ и расходится при $p \leq 1$
+\begin{proof}
+При $p < 0$ слагаемое $\frac{1}{k^p}$ не стремится к нулю следовательно ряд расходится.
+При $p > 0$: по признаку Коши ряд сходится тогда и только тогда, когда сходится и ряд $\displaystyle\sum_{k = 1}^{\infty}\frac{2^k}{2^{kp}} = \displaystyle\sum_{k = 1}^{\infty}(2^{1-p})^k$, а это сумма геометрической прогрессии, которая сходится при $2^{1-p} < 1$, то есть при $p > 1$ и расходится при $p \leq 1$
+\end{proof}
+
+\end{document}
