@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+
+\begin{document}
+
+
+\section{Определения предела функции (по множеству) по Коши и по Гейне, их эквивалентность. Свойства предела функции (единственность, линейность, предел произведения и отношения, предел и неравенства, ограниченность, отделимость, предел композиции). Замечательные пределы. @Quizert}
+\subsection{Предел функции по Коши}
+Пусть функция $f$ определена на некотором множестве $D \subset R$ и $a $ - предельная для $D$ точка, тогда
+\begin{center}
+$\lim_{x \to a} f(x) = A \Longleftrightarrow \\ \forall \epsilon > 0 \ \exists \delta > 0: \forall x \in D \cap \beta'_{\delta}(a) \to |f(x) - A | < \epsilon$
+\end{center}
+\subsection{Предел функции по Гейне}
+Пусть функция $f$ определена на некотором множестве $D \subset R$ и $a $ - предельная для $D$ точка, тогда
+\begin{center}
+$\lim_{x \to a} f(x) = A \Longleftrightarrow \\ \forall \{x_n\} \in D \backslash \{a\} :\lim_{n \to \infty}x_n = a \to \lim_{n\to \infty} f(x_n) = A$
+\end{center}
+\subsection{Эквивалентность двух определений}
+От Коши к Гейне:\newline Пусть $\lim_{x\to a}f(x) = A$ в смысле коши, тогда рассмотрим последовательность точек $x_n \in D \backslash \{a\}: x_n \to a$, по определению предела по коши 
+\begin{center}
+$\forall \epsilon > 0 \ \exists \delta > 0: \forall x \in D \cap \beta'_{\delta}(a) \to |f(x) - A | < \epsilon$
+\end{center}
+последовательность $x_n \to a$, то есть 
+\begin{center}
+$\exists N: \forall n > N \to x_n \in \beta_{\delta}(a)$    
+\end{center}
+при $n > N$ $x_n \in D \backslash \{a\} \cap \beta_{\delta}(a)$, то есть при $n > N$ выполняется $
+|f(x_n) - A| < \epsilon, $ что и означает, что $A$ - предел функции по гейне\newline
+От Гейне к Коши:\newline Пусть число $A$ не является пределом функции $f$ в точке $a$ в смысле коши, тогда это означает, что
+\begin{center}
+$\exists \epsilon > 0: \forall \delta > 0 \ \exists x_{\delta} \in D \cap \beta'_{\delta}(a): |f(x_{\delta}) - A| \geq \epsilon$
+\end{center}
+по определению  по гейне: для последовательности точек $ x_{1/n} \in D \backslash \{a\} $ (то есть берем $\delta = 1/n$) выполняется, что $\{x_{1/n}\} \to a$ но заметим, что $|f(x_{1/n}) - A| \geq \epsilon $, тогда $A$ не является пределом $f$ в смысле гейне
+\subsection{Свойства}
+Пусть функции $f, g, h$ определены на некотором множестве $D \subset R$ и пусть $a$ - предельная для $D$ точка, тогда выполнены следующие свойства:\newline
+$\bullet$ Единственность:
+\begin{center}
+$\lim_{x \to a} f(x) = A, \lim_{x \to a} f(x) = B \Rightarrow A  = B$
+\end{center}
+$\bullet$ Линейность:
+\begin{center}
+$\lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B \Rightarrow \\\lim_{x \to a} (\alpha f(x) + \beta g(x) ) = \alpha A + \beta B \ \\ \forall \alpha, \beta \in R$
+\end{center}
+$\bullet$ Предел произведения:
+\begin{center}
+$\lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B \Rightarrow \lim_{x \to a} (f(x) \cdot g(x)) = A \cdot B$
+\end{center}
+$\bullet$ Предел частного:
+\begin{center}
+$\lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B \not = 0, \forall x \in D \to g(x) \not = 0 \Rightarrow \\
+\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B}$
+\end{center}
+$\bullet$ Предел и неравенства: (входит ли сюда лемма о милиционерах или нет? Жду ответ Музы)
+\begin{center}
+$\exists \epsilon  > 0: \  \forall x \in D \cap \beta'_{\delta}(a) \to  f(x) \leq g(x), \\ \lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B \Rightarrow \\A \leq B$
+\end{center}
+$\bullet$ Ограниченность:
+\begin{center}
+$\lim_{x \to a} f(x) = A \Rightarrow \exists \delta > 0, C > 0: \forall x \in D \cap \beta'_{\delta}(a)  \to |f(x)| \leq C $
+\end{center}
+$\bullet$ Отделимость:
+\begin{center}
+$\lim_{x \to a} f(x) = A \Rightarrow \exists \delta > 0: \forall x \in D \cap \beta'_{\delta}(a)  \to |f(x)| > \frac{|A|}{2}$
+\end{center}
+Все свойства кроме отделимости и ограниченности следуют из аналогичных свойств для предела последовательности и определения через Гейне (так написано в учебнике).\newline
+$\bullet$ Доказательство ограниченности: найдется такое  $\delta > 0: |f(x) - A| < 1$ при $x \in D \cap \beta'_{\delta}(a)$ , таким образом при $x \in D \cap \beta'_{\delta}(a)$ выполнено $|f(x) | < 1 + |A|$\newline
+$\bullet$ Доказательство отделимости: найдется такое  $\delta > 0: |f(x) - A| < \frac{|A|}{2}$ при $x \in D \cap \beta'_{\delta}(a)$ , таким образом при $x \in D \cap \beta'_{\delta}(a)$ будет выполнено 
+$$
+|A| - |f(x)| \leq |f(x) - A| < \frac{|A|}{2} \Rightarrow \\ |f(x)| > \frac{|A|}{2}
+$$\newline
+$\bullet$ Предел композиции:\newline
+Пусть $f: D \xrightarrow{} E, g: E \xrightarrow{} R, a - $ предельная точка множества $D$, $b$ - предельная точка множества E, $\lim_{x \to a} f(x) = b, \lim_{y \to b} g(y) = c$ и есть такая проколотая окрестность $\beta'_{\delta}(a)$ точки $a$, что $f(x) \not = b $ для каждой точки $x \in D \cap \beta'_{\delta}(a)$. Тогда $\lim_{x \to a} g(f(x)) = c$\newline
+Доказательство:\newline Пусть $x_n \xrightarrow{} a, x_n \in D$. $ x_n \not = a.$ Т.к. $f(x) \not = b$ для каждой точки $x \in D \cap \beta'_{\delta}(a)$, то найдется такой номер $N$, что $f(x_n) \not = b$ при $n > N_0$. Поэтому последовательность $f(x_{N+1}), f(x_{N+2}), ...$ состоит из элементов множества $E$, ни один из этих элементов не совпадает с $b$ и эта последовательность сходится к $b$. Поэтому последовательность $g(f(x_{N+1})), g(f(x_{N+2})), ... $ сходится к $c$. Значит и вся последовательность \{$g(f(x_n))$\} сходится к $c$  \newline
+\subsection{Замечательные пределы}
+$\bullet$ Первый замечательный предел: $\lim_{x \to 0}\frac{\sin x}{x} = 1$ \newline
+Доказательство: для $x \in (0, \pi/2)$ рассмотрим два треугольника и площадь сектора, сравним их и получим (сначала треугольник внутри круга, потом сектор, потом треугольники со стороной по касательной к кругу)
+\begin{center}
+$\frac12 \cdot 1 \cdot \sin x \leq \frac{x}2\leq \frac12 \cdot 1 \cdot \tg x$
+\end{center}
+откуда, в силу четности при $x \in (-\pi/2, \pi/2), x \not = 0$ выполнено
+\begin{center}
+$\cos x \leq \frac{\sin x}{x} \leq 1$
+\end{center}
+Утверждение теперь следует из теоремы о зажатой функции, т.к. $\lim_{x \to y} \cos x = \cos y$\newline
+Действительно, $|\cos x - \cos y| = 2|\sin{(\frac{x+y}{2})}\sin{(\frac{x-y}{2})}| \leq 2|\sin{(\frac{x-y}{2})}|\leq |x - y|$\newline\newline
+$\bullet$ Второй замечательный предел: $\lim _{x \to +\infty}\left(1 + \frac1x\right)^x = e$\newline
+Доказательство: рассмотрим функции $f(x) := (1 + \frac{1}{[x] + 1})^{[x]}, g(x) := (1 + \frac{1}{[x]})^{[x] + 1}, $ тогда $ \newline
+f(x) \leq \left(1 + \frac1x\right)^x \leq g(x), $ кроме того, т.к.  $\lim_{n \to +\infty} (1 + \frac{1}{n + 1})^{n} = \lim_{n \to +\infty} (1 + \frac{1}{n})^{n + 1} = e$, то и $\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} g(x) =e$. Утверждение теперь следует из теореме о пределе зажатой функции.
+\end{document}
