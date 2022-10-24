@@ -59,6 +59,16 @@
 \usepackage{indentfirst}
 \usepackage{dsfont}
 \usepackage{amsthm}
+
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{proposition}[theorem]{Предложение}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Определение}
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
