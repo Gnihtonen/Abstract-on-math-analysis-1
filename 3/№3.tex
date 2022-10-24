@@ -1,0 +1,176 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{proposition}[theorem]{Предложение}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Определение}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\title{Коллоквиум по курсу "Математический анализ", I курс, осенний семестр 2022}
+\author{Группа БПМИ2211}
+
+\begin{document}
+\maketitle
+
+\section{Предел последовательности, его основные свойства (единственность, арифметические свойства, ограниченность сходящейся последовательности, отделимость).}
+\subsection{Предел последовательности}
+Если каждому числу $n\in \mathbb{N}$ поставлено в соответствие некоторое число $a_n$, то говорим, что задана {\bf числовая последовательность} $\{a_n\}_{n=1}^\infty$. \\
+Говорят, что последовательность $\{a_n\}_{n=1}^\infty$
+{\bf сходится} к числу $a$,
+если
+для каждого числа $\varepsilon>0$
+найдется такое натуральное число (номер) $N(\varepsilon)\in \mathbb{N}$,
+что $|a_n - a|<\varepsilon$ при каждом $n>N(\varepsilon)$.
+То же самое утверждение можно переписать в кванторах $\forall-\exists$
+следующим образом:
+$$
+\forall\varepsilon>0\, \exists N(\varepsilon)\in \mathbb{N}\colon \forall n>N(\varepsilon)\ |a_n-a|<\varepsilon.
+$$
+Используются обозначения: $\lim\limits_{n\to\infty}a_n=a$ или $a_n\to a$ при $n\to \infty$.
+
+\begin{example}
+$1)$ Последоввательность $a_n=\frac{1}{n}$ сходится к числу $a=0$.
+Действительно
+$$
+\Bigl|\frac{1}{n} - 0\Bigr|= \frac{1}{n},
+$$
+поэтому при $N(\varepsilon)=[\frac{1}{\varepsilon}]+1>\frac{1}{\varepsilon}$ выполнено
+$|a_n-a|<\varepsilon$.
+
+
+$2)$ Последовательность $a_n = (-1)^n$ не имеет предела.
+Действительно, если $a$ ее предел, то при достаточно больших $n$
+$|a-a_n|<1/2$ и $|a-a_{n+1}|<1/2$, а значит по неравенству треугольника
+$2=|a_n - a_{n+1}|<1$, что приводит к противоречию.
+\end{example}
+\subsection{Основные свойства предела последовательности}
+Последовательность $\{a_n\}_{n=1}^\infty$
+называется {\bf ограниченной}, если существуют такие числа
+$C,c\in \mathbb{R}$, что $c\le a_n\le C$ для каждого $n\in \mathbb{N}$.
+
+\subsubsection{Единственность предела}
+Пусть $\lim\limits_{n\to\infty}a_n = a$
+и $\lim\limits_{n\to\infty}a_n = b$,
+тогда $a=b$.
+
+\begin{proof}
+Действительно, если $a\ne b$, то $|a-b|=\varepsilon_0>0$.
+Но по определению найдется номер $N_1$,
+для которго $|a_n-a|<\frac{\varepsilon_0}{2}$ при $n>N_1$
+и найдется номер $N_2$, для которого $|a_n-b|<\frac{\varepsilon_0}{2}$
+при $n>N_2$.
+Тогда при $n>\max\{N_1, N_2\}$ выполено
+$$
+\varepsilon_0 = |a-b| = |a - a_n + a_n - b|\le |a-a_n| + |a_n-b|<\varepsilon_0.
+$$
+Противоречие.
+\end{proof}
+\subsubsection{Арифметика предела}
+Пусть $\lim\limits_{n\to\infty}a_n=a$ и $\lim\limits_{n\to\infty}b_n=b$.
+Тогда
+
+$1)\ \lim\limits_{n\to\infty}(\alpha a_n + \beta b_n)=\alpha a+ \beta b$
+$\forall \alpha,\beta\in \mathbb{R}$;
+
+$2)\ \lim\limits_{n\to\infty}a_nb_n=ab$;
+
+$3)$ если $b\ne0$, $b_n\ne 0$, то $\lim\limits_{n\to \infty}\frac{a_n}{b_n} = \frac{a}{b}$.
+
+\begin{proof}
+Пусть $\varepsilon>0$ --- произвольное число.
+Тогда найдется номер $N_1$, для которого $|a_n-a|<\varepsilon$,
+и найдется номер $N_2$, для которого $|b_n-b|<\varepsilon$.
+
+$1)$ Получаем, что при $n>N=\max\{N_1, N_2\}$
+выполнено
+$$
+|\alpha a_n +\beta b_n - (\alpha a+\beta b)|
+=
+|\alpha (a_n-a) +\beta (b_n-b)|
+\le
+|\alpha| |a_n-a| + |\beta| |b_n-b|< (|\alpha| + |\beta|)\varepsilon.
+$$
+
+$2)$ Замечаем, что
+$|a_nb_n - ab| = |a_nb_n - ab_n + ab_n - ab|\le
+|b_n||a_n - a| + |a||b_n - b|.$
+Т.к. сходящаяся последовательность ограничена,
+то найдется число $M>0$, для которого
+$|b_n|\le M$, поэтому
+при $n>N=\max\{N_1, N_2\}$
+выполнено
+$|a_nb_n - ab|\le (M + |a|)\varepsilon.$
+
+$3)$ Достаточно проверить, что $\frac{1}{b_n}\to \frac{1}{b}$ при $n\to\infty$.
+Заметим, что по условию $b\ne 0$, поэтому найдется номер $N_3\in \mathbb{N}$,
+для которого, при $n>N_3$, выполнено
+$|b_n|>\frac{|b|}{2}$.
+Тогда при $n>\max\{N_2, N_3\}$ выполнено
+$$
+\Bigl|\frac{1}{b_n}-\frac{1}{b}\Bigr| = \frac{|b_n-b|}{|b_n||b|}\le \frac{2}{|b|^2}\cdot \varepsilon.
+$$
+\end{proof}
+\subsubsection{Ограниченность сходящейся последовательности}
+Сходящаяся последовательность ограничена.
+\begin{proof}
+Если $\lim\limits_{n\to\infty}a_n=a$,
+то для некоторого $N\in \mathbb{N}$
+выполнено
+$|a_n-a|<1$ при $n>N$.
+Отсюда $|a_n| = |a_n-a+a|\le |a_n-a|+|a|<1+|a|$ при $n>N$.
+Значит,
+$$
+|a_n|\le M=\max\{1+|a|, |a_1|,\ldots, |a_N|\},
+$$
+т.е. $-M=c\le a_n \le C= M$.
+\end{proof}
+\subsubsection{Лемма об отделимости}
+Если $a_n\to a$ и $a\ne 0$,
+то найдется номер $N\in \mathbb{N}$,
+для которого $|a_n|>\frac{|a|}{2}>0$
+при $n>N$.
+\begin{proof}
+
+$\forall \varepsilon > 0: N(\varepsilon) \in \mathbb{N} \ \forall n > N(\varepsilon): |a_n - a| < \varepsilon \\ \text{Возьмем } \varepsilon = \frac{|a|}{2} > 0: \exists N \ \forall n > N: |a_n - a| < \frac{|a|}{2} \\ |a_n| = |a_n + a - a| \geq |a| - |a_n - a| > \frac{|a|}{2}$
+\end{proof}
+\end{document}
