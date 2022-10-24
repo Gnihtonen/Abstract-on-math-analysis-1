@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{proposition}[theorem]{Предложение}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Определение}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\title{Коллоквиум по курсу "Математический анализ", I курс, осенний семестр 2022}
+\author{Группа БПМИ2211}
+
+\begin{document}
+\maketitle
+
+\section{Вычисление $\sqrt{2}$ с помощью рекурентной формулы $a_{n+1}=\frac{1}{2}\bigl(a_n + \frac{2}{a_n}\bigr), a_1 = 2$, обоснование сходимости и оценка скорости сходимости. Число $e$ (определение и обоснование корректности).}
+\subsection{Вычисление $\sqrt{2}$ с помощью рекурентной формулы $a_{n+1}=\frac{1}{2}\bigl(a_n + \frac{2}{a_n}\bigr)$}
+{\rm 
+$(\sqrt{a} - \sqrt{b})^2 \geq 0, \  a - 2\sqrt{ab} + b \geq 0, \ a + b \geq 2\sqrt{ab}$ \\ 
+Заметим, что 
+$$
+a_{n+1}=\frac{1}{2}\Bigl(a_n + \frac{2}{a_n}\Bigr)\ge \frac{1}{2}\cdot 2\sqrt{a_n\cdot\frac{2}{a_n}}=\sqrt2.
+$$
+Поэтому $a_n\ge\sqrt 2$.
+Кроме того
+$
+a_{n+1}=\frac{1}{2}\bigl(a_n + \frac{2}{a_n}\bigr) \le \frac{1}{2}\bigl(a_n + \frac{a_n^2}{a_n}\bigr)=a_n.
+$ \\ 
+$\{a_n\}_{n=1}^\infty$ ограничена снизу и не возрастает, тогда по т. Вейерштрасса у последовательности $\{a_n\}_{n=1}^\infty$
+существует предел $a$. Т.к. $a_n\ge \sqrt2>0$, то и $a> 0$.
+Тогда, по арифметике предела получаем
+$a =\frac{1}{2}\bigl(a + \frac{2}{a}\bigr)$, откуда $a=\sqrt2$.
+
+Исследуем теперь скорость сходимости:
+$$
+|a_{n+1} - \sqrt2| = \frac{|a_n^2 - 2 a_n\sqrt2 +2|}{2a_n}
+=
+\frac{(a_n - \sqrt2)^2}{2a_n}
+\le
+\frac{(a_n - \sqrt2)^2}{2\sqrt2}\le (a_n - \sqrt2)^2.
+$$
+Индуктивно получаем
+$$
+|a_{n+1} - \sqrt2| \le (a_n - \sqrt2)^2 \le (a_{n-1} - \sqrt2)^4
+\le (a_{n-2} - \sqrt2)^8\le (a_1 - \sqrt2)^{2^{n}} = (2 - \sqrt2)^{2^{n}}.
+$$
+Заметим, что $q:=2-\sqrt2 <1$, поэтому полученная скорость сходимость $q^{2^n}$
+быстрее экспоненциальной $q^n$
+(в смысле количества применений рекуррентной формулы для достижения заданной точности).
+}
+\subsection{Число $e$}
+У последовательности $a_n = \left(1+\frac{1}{n}\right)^n$ есть предел, который называют \textbf{числом} $e$. \\ 
+Пусть $a_n = \Bigl(1+\frac{1}{n}\Bigr)^{n}$.
+По биному Ньютона
+$$
+a_n = \sum_{k=0}^{n}C_n^k \frac{1}{n^k}
+= 2+\sum_{k=2}^{n}\frac{1}{k!}\frac{n\cdot (n-1)\cdot\ldots\cdot (n-k+1)}{n^k}
+=2+\sum_{k=2}^{n}\frac{1}{k!}\Bigl(1-\frac{1}{n}\Bigr)\cdot\ldots\cdot\Bigl(1-\frac{k-1}{n}\Bigr).
+$$
+Отсюда, во-первых, получаем, что
+$$
+a_n\le2+\sum_{k=2}^{n}\frac{1}{k!}\le 2+\sum_{k=2}^{n}\frac{1}{2^{k-1}}< 3,
+$$
+где было использовано неравенство $k! = 1\cdot2\cdot3\cdot\ldots\cdot k \ge 2^{k-1}$
+при $k\ge 2$.
+Во-вторых,
+\begin{multline*}
+a_n=2+\sum_{k=2}^{n}\frac{1}{k!}\Bigl(1-\frac{1}{n}\Bigr)\cdot\ldots\cdot\Bigl(1-\frac{k-1}{n}\Bigr)
+\le
+2+\sum_{k=2}^{n}\frac{1}{k!}\Bigl(1-\frac{1}{n+1}\Bigr)\cdot\ldots\cdot\Bigl(1-\frac{k-1}{n+1}\Bigr)
+\\
+\le
+2+\sum_{k=2}^{n+1}\frac{1}{k!}\Bigl(1-\frac{1}{n+1}\Bigr)\cdot\ldots\cdot\Bigl(1-\frac{k-1}{n+1}\Bigr)=a_{n+1}.
+\end{multline*}
+Таким образом, последовательность $a_n$ --- неубывает и ограничена сверху, а значит имеет предел,
+который называют {\bf числом $e$}.
+
+
+
+\end{document}
