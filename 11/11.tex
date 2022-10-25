@@ -1,0 +1,177 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{mathbbol}
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage[titles]{tocloft}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ulem}
+\usepackage{nicefrac}
+\usepackage{indentfirst}
+\usepackage{dsfont}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{proposition}[theorem]{Предложение}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Определение}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\begin{document}
+
+\section{Компакты на $\mathbb{R}$: определение, 3 базовых свойства. Теорема Бореля-Гейне-Лебега о компактности отрезка. Два эквивалентных описания компактных множеств на $\mathbb{R}$.}
+
+\subsection{Определение.}
+
+\begin{definition}
+Говорят, что набор множеств $\{U_\alpha\}_{\alpha\in A}$ образует {\bf покрытие}
+множества $M\subset \mathbb{R}$, если $M\subset \bigcup\limits_{\alpha\in A}U_\alpha$
+(также гооврят, что система $\{U_\alpha\}_{\alpha\in A}$ является покрытием множества $M$).
+\end{definition}
+
+\begin{definition}
+Множество $K\subset \mathbb{R}$ называется {\bf компактом} (или компактным множеством),
+если для каждого покрытия $\{U_\alpha\}_{\alpha\in A}$ множества $K$
+открытыми множествами $U_\alpha$ существует конечный поднабор
+$\{U_{\alpha_1}, \ldots, U_{\alpha_N}\}$ этих множеств все еще покрывающий $K$
+(т.е. $K\subset \bigcup_{j=1}^N U_{\alpha_{j}}$).
+
+Кратко иногда это свойство формулируют так:
+Множество $K$ --- компакт, если из каждого покрытия этого множества открытыми множествами
+можно выбрать конечное подпокрытие.
+\end{definition}
+
+\subsection{Теорема Бореля-Гейне-Лебега о компактности отрезка.}
+
+\begin{theorem}[Борель--Гейне--Лебег]
+Каждый отрезок является компактным множеством.
+\end{theorem}
+
+\begin{proof}
+Предположим, что есть такой отрезок $[a, b]$ и такое его покрытие $\{U_\alpha\}_{\alpha\in A}$
+окрытыми множествами, что никакой конечный поднабор этих множеств не покрывает $[a, b]$.
+Рассмотрим подотрезки $[a, \frac{a+b}{2}]$ и $[\frac{a+b}{2}, b]$.
+Для какой-то из этих половинок никакой конечный поднабор множеств
+$\{U_\alpha\}_{\alpha\in A}$ не покрывает эту половинку (если бы для каждой из половинок
+был бы покрывающий ее конечный поднабор,
+то и весь отрезок бы покрывался объединением этих конечных поднаборов).
+Обозначим эту половинку $[a_1, b_1]$. Снова поделим отрезок пополам
+и рассмотрим подотрезки $[a_1, \frac{a_1+b_1}{2}]$ и $[\frac{a_1+b_1}{2}, b_1]$.
+Для какой-то из этих половинок никакой конечный поднабор множеств
+$\{U_\alpha\}_{\alpha\in A}$ не покрывает эту половинку.
+Обозначим эту половинку $[a_2, b_2]$.
+Продолжая описанную процедуру индуктивно, строим последовательность вложенных отрезков
+$[a_{n+1}, b_{n+1}]\subset [a_n, b_n]$ с тем свойством, что
+никакой конечный поднабор множеств
+$\{U_\alpha\}_{\alpha\in A}$ не покрывает отрезок $[a_n, b_n]$.
+
+Пусть $c\in \bigcap_{n=1}^\infty[a_n, b_n]$. Т.к. $c\in [a, b]$, то для некоторого
+индекса $\alpha$ точка $c\in U_\alpha$. Т.к. $U_\alpha$ --- открытое множество,
+то найдется такое число $\varepsilon>0$, что $(c-\varepsilon, c+\varepsilon)\subset U_\alpha$.
+Т.к. $b_n-a_n = \frac{b-a}{2^n}\to 0$, то $a_n\to c$ и $b_n\to c$.
+Тогда для некоторого номера $n_0$ выполнено $a_{n_0}\in (c-\varepsilon, c]$
+и $b_{n_0}\in [c, c+\varepsilon)$. Т.е.
+$[a_{n_0}, b_{n_0}]\subset (c-\varepsilon, c+\varepsilon)\subset U_\alpha$,
+что противоречит построению отрезков $[a_n, b_n]$.
+\end{proof}
+
+\subsection{3 базовых свойства компактных множеств.}
+
+\begin{lemma} Пусть $K$ --- компакт. Тогда
+
+$1)\ K$ --- ограниченное множество;
+
+$2)\ K$ --- замкнутое множество;
+
+$3)$ замкнутое подмножество $K$ также компактно.
+\end{lemma}
+
+\begin{proof}
+$1)$ Заметим, что $K\subset \bigcup_{n=1}^\infty(-n ,n)$. Т.к. $K$ --- компакт,
+то у данного покрытия найдется конечное подпокрытие, т.е.
+$K\subset \bigcup_{j=1}^m(-n_j ,n_j)$. Пусть $C:=\max\{n_1, \ldots, n_m\}$.
+Тогда $K\subset (-C, C)$.
+
+$2)$ Пусть $a\in \mathbb{R}\setminus K$.
+Тогда $K\subset \bigcup_{n=1}^\infty U_n$, где
+$U_n:=(-\infty, a-\frac{1}{n})\cup (a+\frac{1}{n}, +\infty)$.
+Выбрав конечное подпокрытие, получаем, что
+$K\subset \bigcup_{j=1}^m U_{n_j}$. Пусть $C:=\max\{n_1, \ldots, n_m\}$.
+Тогда $K\subset (-\infty, a-\frac{1}{C})\cup(a+\frac{1}{C}, +\infty)$
+и $B_{1/C}(a)\subset \mathbb{R}\setminus K$.
+
+$3)$ Пусть $V\subset K$, $V$ --- замкнутое множество.
+Пусть $\{U_\alpha\}_{\alpha\in A}$ --- покрытие множества $V$.
+Тогда набор, состоящий из множеств $\{U_\alpha\}_{\alpha\in A}$ и $\mathbb{R}\setminus V$
+будет покрытием множества $K$ открытыми множествами.
+В нем можно найти конечный поднабор $U_{\alpha_1}, \ldots, U_{\alpha_m}$
+и, возможно, $\mathbb{R}\setminus V$, покрывающий множество $K$.
+Тогда множество $V$ заведомо покрывается набором $U_{\alpha_1}, \ldots, U_{\alpha_m}$.
+\end{proof}
+
+\subsection{Два эквивалентных описания компактных множеств на $\mathbb{R}$.}
+
+\begin{corollary}
+Множество $K\subset \mathbb{R}$ компактно тогда и только тогда, когда оно ограничено и замкнуто.
+\end{corollary}
+
+\begin{proof}
+Компактные множества обязаны быть замкнутыми и ограниченными.
+Наоборот, если $K$ ограниченное множество, то $K\subset [-C, C]$ для некоторого числа $C>0$.
+Т.к. отрезок --- компактное множество, а $K$ --- замкнутое множество,
+то $K$ также будет компактным множеством по предыдущей лемме.
+\end{proof}
+
+\begin{corollary}
+Множество $K\subset \mathbb{R}$ компактно тогда и только тогда, когда
+из каждой последовательности элементов этого множества
+можно выбрать подпоследовательность, сходящуюся к элементу этого множества.
+\end{corollary}
+
+\begin{proof}
+Если множество $K$ --- компактно, то оно замкнуто и ограничено.
+Пусть $\{a_n\}_{n=1}^\infty\subset K$. По теореме Больцано в данной последовательности
+найдется сходящаяся подпоследовательность $a_{n_k}\to a$. В силу замкнутости множества $K$
+получаем, что $a\in K$.
+
+Наоборот, пусть из каждой последовательности элементов множества $K$
+можно выбрать подпоследовательность, сходящуюся к элементу этого множества.
+Если бы множество $K$ не являлось ограниченным, то для каждого $n\in \mathbb{N}$
+была бы точка $a_n\in K$, $|a_n|>n$. Из такой последовательности невозможно выбрать
+сходящуюся подпоследовательность. Пусть теперь $a_n\in K$, $a_n\to a$.
+По условию, из этой последовательности можно выбрать подпоследовательность $a_{n_k}$,
+сходящуюся к точке множества $K$, т.е. $a_{n_k}\to b\in K$. В силу единственности предела
+и совпадения предела подпоследовательности с пределом всей последовательности получаем,
+что $a=b\in K$.
+\end{proof}
+
+\end{document}
